@@ -21,6 +21,6 @@ typedef struct
 }sshx_link;
 
 int sshx_link_init(sshx_link *);
-int sshx_link_add(sshx_link *);
+int sshx_link_add(sshx_link *,char *d);
 int sshx_link_len(sshx_link);
 #endif /* sshx_link_h */

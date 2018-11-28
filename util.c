@@ -8,35 +8,6 @@
 
 #include "util.h"
 
-unsigned char ssh_hex_to_dec_1(char ch)
-{
-    if(ch >= '0' && ch <= '9')
-    {
-        return ch - '0';
-    }
-    if(ch >= 'A' && ch <='F')
-    {
-        return ch - 'A' + 10;
-    }
-    if(ch >= 'a' && ch <= 'f')
-    {
-        return ch - 'a' + 10;
-    }
-    return -1;
-}
-
-unsigned char* ssh_hex_to_dec(char *src,size_t len)
-{
-    unsigned char dec[len / 2];
-    memset(dec, 0, len / 2);
-    int j = 0;
-    for (int i = 0; i < len - 1; i+=2,j++) {
-        dec[j] = ssh_hex_to_dec_1(src[i]) * 16 + ssh_hex_to_dec_1(src[i+1]);
-    }
-    unsigned char *dec_ptr = dec;
-    return dec_ptr;
-}
-
 int ssh_random_16(u_int8_t *src)
 {
     int result = 0;
@@ -55,5 +26,19 @@ int ssh_random_16(u_int8_t *src)
         --n;
     }
     return OK;
+}
+
+char *sshx_uint8_to_charp(u_int8_t t)
+{
+    char *c = malloc(sizeof(char) * 8);
+    sprintf(c,"%d" ,t);
+    return c;
+}
+
+char *sshx_uint32_to_charp(u_int32_t t)
+{
+    char *c = malloc(sizeof(char) * 32);
+    sprintf(c, "%d",t);
+    return c;
 }
 

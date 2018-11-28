@@ -14,13 +14,12 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "protocols.h"
+#include "sshx.h"
 
 #define MAX_RANDOM 281474976710656
 
-unsigned char * ssh_hex_to_dec(char *,size_t len);
-unsigned char ssh_hex_to_dec_1(char);
-int ssh_random_16(uint8_t *);
-int ssh_packet(void*);
+int sshx_random_16(u_int8_t *);
+char *sshx_uint8_to_charp(u_int8_t);
+char *sshx_uint32_to_charp(u_int8_t);
 
 #endif /* util_h */

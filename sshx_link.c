@@ -24,8 +24,11 @@ int sshx_link_init(sshx_link *s)
     return OK;
 }
 
-int sshx_link_add(sshx_link *s)
+int sshx_link_add(sshx_link *s,char* d)
 {
+    if (d == NULL) {
+        return OK;
+    }
     if (sshx_link_len(*s) + 1 > s->size) {
         s->data = ralloc(sizeof(char) * (s->size + INCREATEMENT));
     }
@@ -33,6 +36,8 @@ int sshx_link_add(sshx_link *s)
         printf("link ralloc failed\n");
         return FAIL;
     }
+    (s->data)[sshx_link_len(*s)] = *(d++);
+    sshx_link_add(s, d);
     return OK;
 }
 

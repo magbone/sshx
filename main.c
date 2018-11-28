@@ -16,7 +16,7 @@
 
 
 #include "util.h"
-#include "protocols.h"
+#include "sshx_transport_protocols.h"
 #include "sshx.h"
 #define BUFF_SIZE 1024
 
@@ -43,16 +43,16 @@ int main(int argc, const char * argv[]) {
     
     // handshake
     //client ---> ssh server Request:SSH-2.0-xxx
-    ClientHello client;
-    create_ClientHello(&client);
+    sshx_client_hello client;
+    create_client_hello(&client);
     len = send(client_socketfd, client.hello, strlen(CLIENT_HELLO), 0);
     memset(buf, 0, BUFF_SIZE);
     len = recv(client_socketfd, buf, BUFF_SIZE, 0);
     printf("%s\n",buf);
     
     //client ---> ssh server Exchange Key Init
-    KeyExchangeInit init;
-    create_KeyExchangeInit_packet(&init);
+    sshx_key_exchange_init init;
+    create_key_exchange_init(&init);
     
     //close socket
     close(client_socketfd);
